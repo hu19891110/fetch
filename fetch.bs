@@ -590,8 +590,7 @@ user-agent-defined <a for=header>value</a> for the
  <li><p>A <dfn export for=body id=concept-body-total-bytes>total bytes</dfn> (an
  integer), initially 0.
 
- <li><p>A <dfn export for=body id=concept-body-replayable>replayable flag</dfn> (a boolean),
- initially false.
+ <li><p>A <dfn export for=body id=concept-body-replayable>replayable flag</dfn>, initially unset.
 </ul>
 
 <p>A <a for=/>body</a> <var>body</var> is said to be
@@ -3028,9 +3027,9 @@ in addition to <a>HTTP fetch</a> above.
  <a lt="include credential">includes credentials</a>, then return a
  <a>network error</a>.
 
- <li><p>If <var>request</var>'s <a for=request>method</a> is not <code>303</code>,
+ <li><p>If <var>actualResponse</var>'s <a for=response>status</a> is not <code>303</code>,
  <var>request</var>'s <a for=request>body</a> is not null, and <var>request</var>'s
- <a for=request>body</a>'s <a for=body>replayable flag</a> is false, then return a
+ <a for=request>body</a>'s <a for=body>replayable flag</a> is unset, then return a
  <a>network error</a>.
 
  <li>
@@ -3375,7 +3374,7 @@ steps:
    parsing issues.
 
    <li><p>If <var>request</var>'s <a for=request>body</a> is not null and <var>request</var>'s
-   <a for=request>body</a>'s <a for=body>replayable flag</a> is false, then return a
+   <a for=request>body</a>'s <a for=body>replayable flag</a> is unset, then return a
    <a>network error</a>.
 
    <li>
@@ -4252,7 +4251,7 @@ method, when invoked, must run these steps:
 <h3 id=body-mixin>Body mixin</h3>
 
 <pre class=idl>
-typedef (Blob or BufferSource or FormData or URLSearchParams or USVString or ReadableStream) BodyInit;</pre>
+typedef (Blob or BufferSource or FormData or URLSearchParams or ReadableStream or USVString) BodyInit;</pre>
 
 <p>To <dfn id=concept-bodyinit-extract for=BodyInit export>extract</dfn> a <a for=/>body</a> and a
 `<code>Content-Type</code>` <a for=header>value</a> from
@@ -4350,9 +4349,10 @@ typedef (Blob or BufferSource or FormData or URLSearchParams or USVString or Rea
    <a abstract-op>close</a> <var>stream</var>.
   </ol>
 
- <li><p>Let <var>body</var> be a <a for=/>body</a> whose
- <a for=body>stream</a> is <var>stream</var> and <a for=body>replayable flag</a> is
- <var>replayable</var>.
+ <li><p>Let <var>body</var> be a <a for=/>body</a> whose <a for=body>stream</a> is
+ <var>stream</var>.
+
+ <li><p>Set <var>body</var>'s <a for=body>replayable flag</a> if <var>replayable</var> is true.
 
  <li><p>Return <var>body</var> and <var>Content-Type</var>.
 </ol>
