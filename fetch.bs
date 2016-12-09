@@ -577,7 +577,7 @@ user-agent-defined <a for=header>value</a> for the
 <ul>
  <li>
   <p>A <dfn export for=body id=concept-body-stream>stream</dfn> (a
-  {{ReadableStream}} object).
+  {{ReadableStream}} object or null).
 
   <p class=XXX><a href=https://github.com/whatwg/streams/issues/379>This might become a
   <code>ReadableByteStream</code> object</a>. While the type might change, the behavior specified
@@ -3093,16 +3093,36 @@ steps:
 <i>authentication-fetch flag</i>.
 
 <ol>
- <li>
-  <p>Let <var>httpRequest</var> be <var>request</var> if
-  <var>request</var>'s <a for=request>window</a> is "<code>no-window</code>"
-  and <var>request</var>'s <a for=request>redirect mode</a> is
-  "<code>error</code>", and the result of <a lt=clone for=request>cloning</a>
-  <var>request</var> otherwise.
+ <li><p>Let <var>httpRequest</var> be a new <a for=/>request</a>.
 
-  <p class="note no-backref">A <var>request</var> is typically cloned as it needs to be possible to
-  add <a>headers</a> without affecting <var>request</var>. As
-  <var>request</var> is reused with redirects, authentication, and proxy authentication.
+ <li><p>If <var>request</var>'s <a for=request>window</a> is "<code>no-window</code>" and
+ <var>request</var>'s <a for=request>redirect mode</a> is "<code>error</code>", then set
+ <var>httpRequest</var> to <var>request</var>.
+
+ <li>
+  <p>Otherwise, if <var>request</var>'s <a for=request>body</a> is null, then set
+  <var>httpRequest</var> to a copy of <var>request</var> except for its <a for=request>body</a>.
+
+  <p class="note no-backref"><var>request</var> can be reused with redirects, authentication, and
+  proxy authentication.
+
+ <li>
+  <p>Otherwise, run these substeps:
+
+  <ol>
+   <li><p>Set <var>httpRequest</var> to a copy of <var>request</var> except for its
+   <a for=request>body</a>.
+
+   <li><p>Set <var>httpRequest</var>'s <a for=request>body</a> to <var>request</var>'s
+   <a for=request>body</a>.
+
+   <li><p>Set <var>request</var>'s <a for=request>body</a> to a new <a for=/>body</a> whose
+   <a for=body>stream</a> is null and <a for=body>source</a> is <var>httpRequest</var>'s
+   <a for=request>body</a>'s <a for=body>source</a>.
+  </ol>
+
+  <p class="note no-backref"><var>request</var> can be reused with redirects, authentication, and
+  proxy authentication.
 
  <li>
   <p>Let <i>credentials flag</i> be set if one of
@@ -3390,7 +3410,6 @@ steps:
      then return a <a>network error</a>.
 
      <li>
-      <p>
       <p>Set <var>request</var>'s <a for=request>body</a> to the first part of
       <a lt=extract for=BodyInit>extracting</a> <var>request</var>'s <a for=request>body</a>'s
       <a for=body>source</a>.
@@ -4346,7 +4365,7 @@ typedef (Blob or BufferSource or FormData or URLSearchParams or ReadableStream o
 
     <p>Set <var>Content-Type</var> to `<code>text/plain;charset=UTF-8</code>`.
 
-    <p>Set <var>source</var> to object.
+    <p>Set <var>source</var> to <var>object</var>.
 
    <dt>{{ReadableStream}}
    <dd><p>Set <var>stream</var> to <var>object</var>.
