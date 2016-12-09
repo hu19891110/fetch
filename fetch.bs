@@ -3056,7 +3056,7 @@ in addition to <a>HTTP fetch</a> above.
  to null.
 
  <li>
-  <p>If <var>request</var>'s <a for=request>body</a> is not null, then set <var>request</var>'s
+  <p>If <var>request</var>'s <a for=request>body</a> is non-null, then set <var>request</var>'s
   <a for=request>body</a> to the first part of <a lt=extract for=BodyInit>extracting</a>
   <var>request</var>'s <a for=request>body</a>'s <a for=body>source</a>.
 
