@@ -4391,7 +4391,7 @@ typedef (Blob or BufferSource or FormData or URLSearchParams or ReadableStream o
   </ol>
 
  <li><p>Let <var>body</var> be a <a for=/>body</a> whose <a for=body>stream</a> is
- <var>stream</var> and whose <a fore=body>source</a> is <var>source</var>.
+ <var>stream</var> and whose <a for=body>source</a> is <var>source</var>.
 
  <li><p>Return <var>body</var> and <var>Content-Type</var>.
 </ol>
