@@ -3117,7 +3117,7 @@ steps:
    <a for=request>body</a>.
 
    <li><p>Set <var>request</var>'s <a for=request>body</a> to a new <a for=/>body</a> whose
-   <a for=body>stream</a> is null and <a for=body>source</a> is <var>httpRequest</var>'s
+   <a for=body>stream</a> is null and whose <a for=body>source</a> is <var>httpRequest</var>'s
    <a for=request>body</a>'s <a for=body>source</a>.
   </ol>
 
