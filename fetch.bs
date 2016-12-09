@@ -3093,7 +3093,7 @@ steps:
 <i>authentication-fetch flag</i>.
 
 <ol>
- <li><p>Let <var>httpRequest</var> be a new <a for=/>request</a>.
+ <li><p>Let <var>httpRequest</var> be null.
 
  <li><p>If <var>request</var>'s <a for=request>window</a> is "<code>no-window</code>" and
  <var>request</var>'s <a for=request>redirect mode</a> is "<code>error</code>", then set
