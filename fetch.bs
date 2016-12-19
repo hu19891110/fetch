@@ -3061,10 +3061,8 @@ in addition to <a>HTTP fetch</a> above.
   <var>request</var>'s <a for=request>body</a>'s <a for=body>source</a>.
 
   <p class="note no-backref"><var>request</var>'s <a for=request>body</a>'s <a for=body>source</a>'s
-  nullity has already been checked.
-
-  <p class="note no-backref">The <a lt=extract for=BodyInit>extracting</a> operation cannot throw
-  as it was called for the same <a for=body>source</a> before.
+  nullity has already been checked. The <a lt=extract for=BodyInit>extracting</a> operation cannot
+  throw as it was called for the same <a for=body>source</a> before.
 
  <li><p>Append <var>actualResponse</var>'s
  <a for=response>location URL</a> to <var>request</var>'s
@@ -3100,25 +3098,21 @@ steps:
  <var>httpRequest</var> to <var>request</var>.
 
  <li>
-  <p>Otherwise, if <var>request</var>'s <a for=request>body</a> is null, then set
-  <var>httpRequest</var> to a copy of <var>request</var> except for its <a for=request>body</a>.
-
-  <p class="note no-backref"><var>request</var> can be reused with redirects, authentication, and
-  proxy authentication.
-
- <li>
   <p>Otherwise, run these substeps:
 
   <ol>
    <li><p>Set <var>httpRequest</var> to a copy of <var>request</var> except for its
    <a for=request>body</a>.
 
-   <li><p>Set <var>httpRequest</var>'s <a for=request>body</a> to <var>request</var>'s
-   <a for=request>body</a>.
+   <li><p>Let <var>body</var> be <var>request</var>'s <a for=request>body</a>.
 
-   <li><p>Set <var>request</var>'s <a for=request>body</a> to a new <a for=/>body</a> whose
-   <a for=body>stream</a> is null and whose <a for=body>source</a> is <var>httpRequest</var>'s
-   <a for=request>body</a>'s <a for=body>source</a>.
+   <li>
+    <p>If <var>body</var> is non-null, then set <var>request</var>'s <a for=request>body</a> to a
+    new <a for=/>body</a> whose <a for=body>stream</a> is null and whose <a for=body>source</a> is
+    <var>body</var>'s <a for=body>source</a>.
+
+    <p class="note no-backref">Here we do not <a for=request>clone</a> <var>request</var> in order
+    to reduce memory consumption.
   </ol>
 
   <p class="note no-backref"><var>request</var> can be reused with redirects, authentication, and
