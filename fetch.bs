@@ -3112,11 +3112,9 @@ steps:
     <var>body</var>'s <a for=body>source</a>.
 
     <p class="note no-backref">Here we do not <a for=request>clone</a> <var>request</var> in order
-    to reduce memory consumption.
+    to reduce memory consumption. <var>request</var> can be reused with redirects, authentication,
+    and proxy authentication.
   </ol>
-
-  <p class="note no-backref"><var>request</var> can be reused with redirects, authentication, and
-  proxy authentication.
 
  <li>
   <p>Let <i>credentials flag</i> be set if one of
