@@ -3109,8 +3109,8 @@ steps:
    <li><p>Set <var>httpRequest</var>'s <a for=request>body</a> to <var>body</var>.
 
    <li><p>If <var>body</var> is non-null, then set <var>request</var>'s <a for=request>body</a> to a
-    new <a for=/>body</a> whose <a for=body>stream</a> is null and whose <a for=body>source</a> is
-    <var>body</var>'s <a for=body>source</a>.
+   new <a for=/>body</a> whose <a for=body>stream</a> is null and whose <a for=body>source</a> is
+   <var>body</var>'s <a for=body>source</a>.
   </ol>
 
   <p class="note no-backref">Here we do not <a for=request>clone</a> <var>request</var> in order
