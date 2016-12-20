@@ -576,8 +576,8 @@ user-agent-defined <a for=header>value</a> for the
 
 <ul>
  <li>
-  <p>A <dfn export for=body id=concept-body-stream>stream</dfn> (a
-  {{ReadableStream}} object or null).
+  <p>A <dfn export for=body id=concept-body-stream>stream</dfn> (null or a
+  {{ReadableStream}} object).
 
   <p class=XXX><a href=https://github.com/whatwg/streams/issues/379>This might become a
   <code>ReadableByteStream</code> object</a>. While the type might change, the behavior specified
@@ -3106,15 +3106,16 @@ steps:
 
    <li><p>Let <var>body</var> be <var>request</var>'s <a for=request>body</a>.
 
-   <li>
-    <p>If <var>body</var> is non-null, then set <var>request</var>'s <a for=request>body</a> to a
+   <li><p>Set <var>httpRequest</var>'s <a for=request>body</a> to <var>body</var>.
+
+   <li><p>If <var>body</var> is non-null, then set <var>request</var>'s <a for=request>body</a> to a
     new <a for=/>body</a> whose <a for=body>stream</a> is null and whose <a for=body>source</a> is
     <var>body</var>'s <a for=body>source</a>.
-
-    <p class="note no-backref">Here we do not <a for=request>clone</a> <var>request</var> in order
-    to reduce memory consumption. <var>request</var> can be reused with redirects, authentication,
-    and proxy authentication.
   </ol>
+
+  <p class="note no-backref">Here we do not <a for=request>clone</a> <var>request</var> in order
+  to reduce memory consumption. <var>request</var> can be reused with redirects, authentication,
+  and proxy authentication.
 
  <li>
   <p>Let <i>credentials flag</i> be set if one of
